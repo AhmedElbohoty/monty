@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include "monty.h"
 
-#define MAX_LINE_LENGTH 1024
+/* Definition stack */
+__attribute__((unused)) stack_type * stack = NULL;
 
 /**
  * main - Initialize the project
@@ -15,7 +16,7 @@
 int main(int argc, char **argv)
 {
 	FILE *bytecodes;
-	char line[MAX_LINE_LENGTH];
+	char line[1024];
 	char **tokens;
 
 	if (argc != 2)
@@ -31,7 +32,7 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 
-	while (fgets(line, MAX_LINE_LENGTH, bytecodes))
+	while (fgets(line, 1024, bytecodes))
 	{
 		tokens = tokenizer(line);
 		execute(tokens);

@@ -15,7 +15,7 @@ typedef struct stack_s
 	int n;
 	struct stack_s *prev;
 	struct stack_s *next;
-} stack;
+} stack_type;
 
 /**
  * struct instruction_s - opcode and its function
@@ -28,12 +28,18 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack **stack, unsigned int line_number);
+	void (*f)(stack_type **stack, unsigned int line_number);
 } instruction_t;
 
 void *_calloc(unsigned int nmemb, unsigned int size);
 char **tokenizer(char *str);
-void execute(char **tokens);
+int execute(char **tokens);
+
+stack_type *push(stack_type **head, int n);
+size_t pall(void);
+
+/* Declare the stack */
+extern stack_type *stack;
 
 #endif /* MONTY_HEADER */
 

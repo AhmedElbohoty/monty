@@ -4,19 +4,42 @@
 #include "monty.h"
 
 /**
- * execute_cmd - Execute the command
+ * execute - Execute the command
  * @tokens: The command
  *
  * Return: Nothing
  */
-void execute(char **tokens)
+int execute(char **tokens)
 {
-	int i = 0;
+	int num1;
 
-	while (tokens[i] != NULL)
+		if (!tokens[0])
+		return (EXIT_FAILURE);
+
+	if (strcmp(tokens[0], "push") == 0)
 	{
-		printf("%s\n", tokens[i]);
-		i++;
-	}
-}
+		if (!tokens[1])
+		{
+			printf("L<line_number>: usage: push integer\n");
+			return (EXIT_FAILURE);
+		}
 
+		/* TODO: check if second arg is number */
+		num1 = atoi(tokens[1]);
+
+		/* TODO: check if node is NULL */
+		push(&stack, num1);
+
+		return (EXIT_SUCCESS);
+	}
+
+	if (strcmp(tokens[0], "pall") == 0)
+	{
+		pall();
+	}
+
+	if (strcmp(tokens[0], "nop") == 0)
+		return (EXIT_FAILURE);
+
+	return (EXIT_SUCCESS);
+}
