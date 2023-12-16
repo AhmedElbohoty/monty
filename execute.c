@@ -13,7 +13,7 @@ int execute(char **tokens)
 {
 	int num1;
 
-		if (!tokens[0])
+	if (!tokens[0])
 		return (EXIT_FAILURE);
 
 	if (strcmp(tokens[0], "push") == 0)
