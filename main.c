@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 	FILE *bytecodes;
 	char line[1024];
 	char **tokens;
+	int line_num = 1;
 
 	if (argc != 2)
 	{
@@ -35,9 +36,9 @@ int main(int argc, char **argv)
 	while (fgets(line, 1024, bytecodes))
 	{
 		tokens = tokenizer(line);
-		execute(tokens);
+		execute(tokens, line_num);
+		line_num++;
 	}
 
 	return (EXIT_SUCCESS);
 }
-

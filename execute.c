@@ -6,10 +6,11 @@
 /**
  * execute - Execute the command
  * @tokens: The command
+ * @line_num: the number line
  *
  * Return: Nothing
  */
-int execute(char **tokens)
+int execute(char **tokens, int line_num)
 {
 	int num1;
 
@@ -18,9 +19,9 @@ int execute(char **tokens)
 
 	if (strcmp(tokens[0], "push") == 0)
 	{
-		if (!tokens[1])
+		if (!tokens[1] || atoi(tokens[1]) == 0)
 		{
-			printf("L<line_number>: usage: push integer\n");
+			printf("L%d: usage: push integer\n", line_num);
 			return (EXIT_FAILURE);
 		}
 
