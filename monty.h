@@ -1,6 +1,10 @@
 #ifndef MONTY_HEADER
 #define MONTY_HEADER
 
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Type defs */
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -31,14 +35,34 @@ typedef struct instruction_s
 	void (*f)(stack_type **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct state - app state
+ * @stack: the stack
+ * @instructions: instructions
+ * @bytecodes: bytecodes
+ * @tokens: tokens
+ * @line_number: the line number
+ *
+ */
+typedef struct state
+{
+	stack_type *stack;
+	instruction_t *instructions;
+	char **tokens;
+	FILE *bytecodes;
+	unsigned int line_number;
+} app_state;
+
+/* Functions */
 void *_calloc(unsigned int nmemb, unsigned int size);
 char **tokenizer(char *str);
-void execute(char **tokens, int line_num);
 
-stack_type *push(stack_type **head, int n);
-size_t pall(void);
+void init_app(void);
+instruction_t *create_instructions(void);
 
-/* Declare the stack */
-extern stack_type *stack;
+void push(stack_type **stack, unsigned int line_number);
+void pall(stack_type **stack, unsigned int line_number);
+
+extern app_state state;
 
 #endif /* MONTY_HEADER */

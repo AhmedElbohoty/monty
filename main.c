@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "monty.h"
 
 /* Definition stack */
-__attribute__((unused)) stack_type * stack = NULL;
+__attribute__((unused)) app_state state;
 
 /**
  * main - Initialize the project
@@ -15,29 +16,37 @@ __attribute__((unused)) stack_type * stack = NULL;
  */
 int main(int argc, char **argv)
 {
-	FILE *bytecodes;
-	char line[1024];
-	char **tokens;
-	int line_num = 1;
+	char line[64];
+	int i = 0;
+
+	init_app();
 
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE);
 	}
 
-	bytecodes = fopen(argv[1], "r");
-	if (bytecodes == NULL)
+	state.bytecodes = fopen(argv[1], "r");
+	if (state.bytecodes == NULL)
 	{
-		printf("Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
 
-	while (fgets(line, 1024, bytecodes))
+	while (fgets(line, 1024, state.bytecodes))
 	{
-		tokens = tokenizer(line);
-		execute(tokens, line_num);
-		line_num++;
+		state.tokens = tokenizer(line);
+
+		for (i = 0; i < 2; i++)
+		{
+			if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
+			{
+				state.instructions[i].f(&state.stack, state.line_number);
+			}
+		}
+
+		state.line_number++;
 	}
 
 	return (EXIT_SUCCESS);

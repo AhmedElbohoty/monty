@@ -2,6 +2,44 @@
 #include "monty.h"
 
 /**
+ * init_app - Initialize the app state
+ *
+ * Return: Nothing
+ */
+void init_app(void)
+{
+
+	state.stack = NULL;
+
+	state.instructions = create_instructions();
+
+	state.tokens = NULL;
+
+	state.bytecodes = NULL;
+
+	state.line_number = 0;
+}
+
+/**
+ * create_instructions - Create instructions
+ *
+ * Return: pointers to instructions
+ */
+instruction_t *create_instructions(void)
+{
+	instruction_t *ptr = malloc(sizeof(instruction_t) * 3);
+
+	if (!ptr)
+		fprintf(stderr, "Error: malloc failed\n");
+
+	ptr[0].opcode = "push", ptr[0].f = push;
+	ptr[1].opcode = "pall", ptr[1].f = pall;
+	ptr[2].opcode = NULL, ptr[2].f = NULL;
+
+	return (ptr);
+}
+
+/**
  * _calloc - Allocates memory for an array, using malloc
  * @nmemb: number of elements
  * @size: size bytes

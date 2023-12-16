@@ -4,67 +4,62 @@
 
 /**
  * push - Adds a new node at the end of a stack_type list.
- * @head: The pointer to the list.
- * @n: The data for new node.
+ * @stack: The pointer to the stack.
+ * @line_number: The line number.
  *
- * Return: - The address of the new element (Success)
- *         - NULL (Failure)
+ * Return: Nothing
  */
-stack_type *push(stack_type **head, int n)
+void push(stack_type **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_type *node, *temp;
 
 	/* Create the new node */
 	node = malloc(sizeof(stack_type));
 	if (node == NULL)
-		return (NULL);
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		return;
+	}
 
 	node->prev = NULL;
-	node->n = n;
+	node->n = atoi(state.tokens[1]); /* TODO: check if string */
 	node->next = NULL;
 
-	if (*head == NULL)
+	if (*stack == NULL)
 	{
-		*head = node;
-		return (*head);
+		*stack = node;
+		return;
 	}
 
 	/* Add the new node at the end */
-	temp = *head;
+	temp = *stack;
 	while (temp->next != NULL)
 		temp = temp->next;
 
 	temp->next = node;
 	node->prev = temp;
-
-	return (*head);
 }
 
 /**
  * pall - Prints all the elements of a stack_type list.
+ * @stack: The pointer to the stack.
+ * @line_number: The line number.
  *
- * Return: the number of nodes
+ * Return: Nothing
  */
-size_t pall(void)
+void pall(stack_type **stack, __attribute__((unused)) unsigned int line_number)
 {
-	size_t count = 1;
-	stack_type *temp = stack;
+	stack_type *temp = *stack;
 
 	if (temp == NULL)
-		return (0);
+		return;
 
 	while (temp->next != NULL)
-	{
 		temp = temp->next;
-		count++;
-	}
 
 	while (temp != NULL)
 	{
 		printf("%d\n", temp->n);
 		temp = temp->prev;
 	}
-
-	return (count);
 }
-
