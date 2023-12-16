@@ -33,7 +33,7 @@ typedef struct instruction_s
 
 void *_calloc(unsigned int nmemb, unsigned int size);
 char **tokenizer(char *str);
-int execute(char **tokens, int line_num);
+void execute(char **tokens, int line_num);
 
 stack_type *push(stack_type **head, int n);
 size_t pall(void);
