@@ -39,16 +39,13 @@ int main(int argc, char **argv)
 	while (fgets(line, 1024, state.bytecodes))
 	{
 		state.tokens = tokenizer(line);
-
 		if (!state.tokens[0])
 			continue;
 
 		for (i = 0; i < 5; i++)
 		{
 			if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
-			{
 				state.instructions[i].f(&state.stack, state.line_number);
-			}
 		}
 		free(state.tokens);
 		state.tokens = NULL;

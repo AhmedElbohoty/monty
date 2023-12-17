@@ -99,7 +99,7 @@ void pint(stack_type **stack, unsigned int line_number)
  */
 void pop(stack_type **stack, unsigned int line_number)
 {
-	stack_type *temp = *stack;
+	stack_type *temp;
 
 	if (*stack == NULL)
 	{
@@ -108,9 +108,12 @@ void pop(stack_type **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	(*stack)->n = temp->prev->n;
-	(*stack)->next = NULL;
-	(*stack)->prev = temp->prev->prev;
+	temp = *stack;
+	while (temp->next != NULL)
+		temp = temp->next;
+
+	if (temp->prev)
+		temp->prev->next = NULL;
 
 	free(temp);
 }
@@ -122,7 +125,7 @@ void pop(stack_type **stack, unsigned int line_number)
  *
  * Return: Nothing
  */
-void nop(__attribute__((unused)) stack_type **stack, __attribute__((unused)) unsigned int line_number)
+void nop(__attribute__((unused)) stack_type **stack,
+		 __attribute__((unused)) unsigned int line_number)
 {
-	return;
 }
