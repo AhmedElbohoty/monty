@@ -83,6 +83,10 @@ void pint(stack_type **stack, unsigned int line_number)
 		end_app();
 		exit(EXIT_FAILURE);
 	}
+
+	while (temp->next != NULL)
+		temp = temp->next;
+
 	printf("%d\n", temp->n);
 }
 
