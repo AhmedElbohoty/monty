@@ -17,7 +17,7 @@ void init_app(void)
 
 	state.bytecodes = NULL;
 
-	state.line_number = 0;
+	state.line_number = 1;
 }
 
 /**
