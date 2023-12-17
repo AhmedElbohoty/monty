@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		if (!state.tokens[0])
 			continue;
 
-		for (i = 0; i < 2; i++)
+		for (i = 0; i < 5; i++)
 		{
 			if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
 			{

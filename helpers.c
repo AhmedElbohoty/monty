@@ -59,7 +59,7 @@ void end_app(void)
  */
 instruction_t *create_instructions(void)
 {
-	instruction_t *ptr = malloc(sizeof(instruction_t) * 3);
+	instruction_t *ptr = malloc(sizeof(instruction_t) * 6);
 
 	if (ptr == NULL)
 	{
@@ -70,7 +70,10 @@ instruction_t *create_instructions(void)
 
 	ptr[0].opcode = "push", ptr[0].f = push;
 	ptr[1].opcode = "pall", ptr[1].f = pall;
-	ptr[2].opcode = NULL, ptr[2].f = NULL;
+	ptr[2].opcode = "pint", ptr[2].f = pint;
+	ptr[3].opcode = "pop", ptr[3].f = pop;
+	ptr[4].opcode = "nop", ptr[4].f = nop;
+	ptr[5].opcode = NULL, ptr[5].f = NULL;
 
 	return (ptr);
 }

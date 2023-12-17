@@ -75,13 +75,15 @@ void pall(stack_type **stack, __attribute__((unused)) unsigned int line_number)
  */
 void pint(stack_type **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
+	stack_type *temp = *stack;
+
+	if (temp == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		end_app();
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", (*stack)->n);
+	printf("%d\n", temp->n);
 }
 
 /**
@@ -107,4 +109,16 @@ void pop(stack_type **stack, unsigned int line_number)
 	(*stack)->prev = temp->prev->prev;
 
 	free(temp);
+}
+
+/**
+ * nop - Do nothing
+ * @stack: The pointer to the stack.
+ * @line_number: The line number.
+ *
+ * Return: Nothing
+ */
+void nop(__attribute__((unused)) stack_type **stack, __attribute__((unused)) unsigned int line_number)
+{
+	return;
 }
