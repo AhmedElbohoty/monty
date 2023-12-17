@@ -68,6 +68,8 @@ void pop(stack_type **stack, unsigned int line_number);
 void nop(stack_type **stack, unsigned int line_number);
 void swap(stack_type **stack, unsigned int line_number);
 void add(stack_type **stack, unsigned int line_number);
+void sub(stack_type **stack, unsigned int line_number);
+void mul(stack_type **stack, unsigned int line_number);
 
 extern app_state state;
 
