@@ -99,7 +99,7 @@ void pint(stack_type **stack, unsigned int line_number)
  */
 void pop(stack_type **stack, unsigned int line_number)
 {
-	stack_type *temp;
+	stack_type *temp, *prev;
 
 	if (*stack == NULL)
 	{
@@ -112,10 +112,17 @@ void pop(stack_type **stack, unsigned int line_number)
 	while (temp->next != NULL)
 		temp = temp->next;
 
-	if (temp->prev)
-		temp->prev->next = NULL;
-
-	free(temp);
+	prev = temp->prev;
+	if (prev == NULL)
+	{
+		*stack = NULL;
+		free(temp);
+	}
+	else
+	{
+		prev->next = NULL;
+		free(temp);
+	}
 }
 
 /**
