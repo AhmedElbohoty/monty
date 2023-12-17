@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 				state.instructions[i].f(&state.stack, state.line_number);
 			}
 		}
-
+		free(state.tokens);
 		state.line_number++;
 	}
 
