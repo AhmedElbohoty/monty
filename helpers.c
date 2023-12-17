@@ -58,8 +58,12 @@ instruction_t *create_instructions(void)
 {
 	instruction_t *ptr = malloc(sizeof(instruction_t) * 3);
 
-	if (!ptr)
+	if (ptr == NULL)
+	{
 		fprintf(stderr, "Error: malloc failed\n");
+		end_app();
+		exit(EXIT_FAILURE);
+	}
 
 	ptr[0].opcode = "push", ptr[0].f = push;
 	ptr[1].opcode = "pall", ptr[1].f = pall;
@@ -81,12 +85,13 @@ char **tokenizer(char *str)
 
 	temp = strtok(str, delim);
 
-	res = _calloc(50, sizeof(char *));
+	res = malloc(64 * sizeof(char *));
 
-	if (!res)
+	if (res == NULL)
 	{
-		free(res);
-		return (NULL);
+		fprintf(stderr, "Error: malloc failed\n");
+		end_app();
+		exit(EXIT_FAILURE);
 	}
 
 	while (temp)
@@ -101,30 +106,4 @@ char **tokenizer(char *str)
 	res[i] = NULL;
 
 	return (res);
-}
-
-/**
- * _calloc - Allocates memory for an array, using malloc
- * @nmemb: number of elements
- * @size: size bytes
- *
- * Return: - If nmemb or size is 0 OR malloc fails, return NULL.
- *         - Else, pointer to the allocated memory
- */
-void *_calloc(unsigned int nmemb, unsigned int size)
-{
-	char *p;
-	unsigned int i;
-
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-
-	p = malloc(nmemb * size);
-	if (p == NULL)
-		return (NULL);
-
-	for (i = 0; i < (size * nmemb); i++)
-		p[i] = 0;
-
-	return (p);
 }

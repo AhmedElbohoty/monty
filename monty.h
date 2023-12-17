@@ -54,7 +54,6 @@ typedef struct state
 } app_state;
 
 /* Functions */
-void *_calloc(unsigned int nmemb, unsigned int size);
 char **tokenizer(char *str);
 
 void init_app(void);
