@@ -51,6 +51,7 @@ int main(int argc, char **argv)
 			}
 		}
 		free(state.tokens);
+		state.tokens = NULL;
 		state.line_number++;
 	}
 
