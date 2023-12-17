@@ -53,6 +53,17 @@ void end_app(void)
 }
 
 /**
+ * exit_error - exit the app with error
+ *
+ * Return: Nothing
+ */
+void exit_error(void)
+{
+	end_app();
+	exit(EXIT_FAILURE);
+}
+
+/**
  * create_instructions - Create instructions
  *
  * Return: pointers to instructions
@@ -64,8 +75,7 @@ instruction_t *create_instructions(void)
 	if (ptr == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		end_app();
-		exit(EXIT_FAILURE);
+		exit_error();
 	}
 
 	ptr[0].opcode = "push", ptr[0].f = push;
@@ -96,8 +106,7 @@ char **tokenizer(char *str)
 	if (res == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		end_app();
-		exit(EXIT_FAILURE);
+		exit_error();
 	}
 
 	while (temp)

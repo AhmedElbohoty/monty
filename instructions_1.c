@@ -18,8 +18,8 @@ void push(stack_type **stack, __attribute__((unused)) unsigned int line_number)
 	if (node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		end_app();
-		exit(EXIT_FAILURE);
+		exit_error();
+
 		return;
 	}
 
@@ -80,8 +80,7 @@ void pint(stack_type **stack, unsigned int line_number)
 	if (temp == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		end_app();
-		exit(EXIT_FAILURE);
+		exit_error();
 	}
 
 	while (temp->next != NULL)
@@ -104,8 +103,7 @@ void pop(stack_type **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-		end_app();
-		exit(EXIT_FAILURE);
+		exit_error();
 	}
 
 	temp = *stack;
