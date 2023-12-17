@@ -54,5 +54,7 @@ int main(int argc, char **argv)
 		state.line_number++;
 	}
 
+	end_app();
+
 	return (EXIT_SUCCESS);
 }
