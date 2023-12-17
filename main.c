@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 		if (!state.tokens[0])
 			continue;
 
-		for (i = 0; i < 6; i++)
+		for (i = 0; i < 7; i++)
 		{
 			if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
 				state.instructions[i].f(&state.stack, state.line_number);
