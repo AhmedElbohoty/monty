@@ -32,7 +32,7 @@ void end_app(void)
 	if (state.bytecodes)
 		fclose(state.bytecodes);
 
-	if (state.tokens == NULL)
+	if (state.tokens != NULL)
 	{
 		free(state.tokens);
 		state.tokens = NULL;
