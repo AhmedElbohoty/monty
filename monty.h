@@ -58,6 +58,7 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 char **tokenizer(char *str);
 
 void init_app(void);
+void end_app(void);
 instruction_t *create_instructions(void);
 
 void push(stack_type **stack, unsigned int line_number);

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "monty.h"
 
 /**
@@ -65,6 +66,41 @@ instruction_t *create_instructions(void)
 	ptr[2].opcode = NULL, ptr[2].f = NULL;
 
 	return (ptr);
+}
+
+/**
+ * tokenizer - split string
+ * @str: pointer to string
+ *
+ * Return: splitted strings
+ */
+char **tokenizer(char *str)
+{
+	int i = 0;
+	char *temp, **res, *delim = " \r\t\n";
+
+	temp = strtok(str, delim);
+
+	res = _calloc(50, sizeof(char *));
+
+	if (!res)
+	{
+		free(res);
+		return (NULL);
+	}
+
+	while (temp)
+	{
+		if (temp[0] != '\n' && temp[0] != ' ')
+			res[i] = temp;
+
+		temp = strtok(NULL, delim);
+		i++;
+	}
+
+	res[i] = NULL;
+
+	return (res);
 }
 
 /**

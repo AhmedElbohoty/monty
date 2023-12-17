@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
+		end_app();
 		return (EXIT_FAILURE);
 	}
 
@@ -31,12 +32,16 @@ int main(int argc, char **argv)
 	if (state.bytecodes == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		end_app();
 		return (EXIT_FAILURE);
 	}
 
 	while (fgets(line, 1024, state.bytecodes))
 	{
 		state.tokens = tokenizer(line);
+
+		if (!state.tokens[0])
+			continue;
 
 		for (i = 0; i < 2; i++)
 		{
