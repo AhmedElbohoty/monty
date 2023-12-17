@@ -62,6 +62,8 @@ instruction_t *create_instructions(void);
 
 void push(stack_type **stack, unsigned int line_number);
 void pall(stack_type **stack, unsigned int line_number);
+void pint(stack_type **stack, unsigned int line_number);
+void pop(stack_type **stack, unsigned int line_number);
 
 extern app_state state;
 

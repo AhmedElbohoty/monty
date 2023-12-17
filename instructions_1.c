@@ -18,6 +18,7 @@ void push(stack_type **stack, __attribute__((unused)) unsigned int line_number)
 	if (node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 		return;
 	}
 
@@ -59,7 +60,48 @@ void pall(stack_type **stack, __attribute__((unused)) unsigned int line_number)
 
 	while (temp != NULL)
 	{
-		printf("%d\n", temp->n);
+		fprintf(stdin, "%d\n", temp->n);
 		temp = temp->prev;
 	}
+}
+
+/**
+ * pint - prints the value at the top of the stack, followed by a new line.
+ * @stack: The pointer to the stack.
+ * @line_number: The line number.
+ *
+ * Return: Nothing
+ */
+void pint(stack_type **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
+}
+
+/**
+ * pop - removes the top element of the stack.
+ * @stack: The pointer to the stack.
+ * @line_number: The line number.
+ *
+ * Return: Nothing
+ */
+void pop(stack_type **stack, unsigned int line_number)
+{
+	stack_type *temp = *stack;
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->n = temp->prev->n;
+	(*stack)->next = NULL;
+	(*stack)->prev = temp->prev->prev;
+
+	free(temp);
 }

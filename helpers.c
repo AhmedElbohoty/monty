@@ -8,7 +8,6 @@
  */
 void init_app(void)
 {
-
 	state.stack = NULL;
 
 	state.instructions = create_instructions();
@@ -18,6 +17,35 @@ void init_app(void)
 	state.bytecodes = NULL;
 
 	state.line_number = 0;
+}
+
+/**
+ * end_app - end the app and free memory
+ *
+ * Return: Nothing
+ */
+void end_app(void)
+{
+	stack_type *temp;
+
+	if (state.bytecodes)
+		fclose(state.bytecodes);
+
+	if (state.tokens)
+		free(state.tokens);
+
+	if (state.instructions)
+		free(state.instructions);
+
+	if (state.stack)
+	{
+		while (state.stack != NULL)
+		{
+			temp = state.stack->next;
+			free(state.stack);
+			state.stack = temp;
+		}
+	}
 }
 
 /**
