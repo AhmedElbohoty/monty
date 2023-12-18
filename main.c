@@ -17,23 +17,19 @@ __attribute__((unused)) app_state state;
 int main(int argc, char **argv)
 {
 	char line[64];
-	int i = 0;
 
 	init_app();
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		end_app();
-		return (EXIT_FAILURE);
+		exit_error();
 	}
 
 	state.bytecodes = fopen(argv[1], "r");
 	if (state.bytecodes == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		end_app();
-		return (EXIT_FAILURE);
+		exit_error();
 	}
 
 	while (fgets(line, 1024, state.bytecodes))
@@ -42,17 +38,36 @@ int main(int argc, char **argv)
 		if (!state.tokens[0])
 			continue;
 
-		for (i = 0; i < 9; i++)
-		{
-			if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
-				state.instructions[i].f(&state.stack, state.line_number);
-		}
+		handle_instruction();
 		free(state.tokens);
 		state.tokens = NULL;
 		state.line_number++;
 	}
-
 	end_app();
-
 	return (EXIT_SUCCESS);
+}
+
+/**
+ * handle_instruction - Selection function for instruction
+ *
+ * Return: - Nothing
+ */
+void handle_instruction(void)
+{
+	int i = 0;
+
+	for (i = 0; i < 10; i++)
+	{
+		if (state.instructions[i].opcode == NULL)
+		{
+			fprintf(stderr, "L%u: unknown instruction %s\n", state.line_number,
+					state.tokens[0]);
+			break;
+		}
+		else if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
+		{
+			state.instructions[i].f(&state.stack, state.line_number);
+			break;
+		}
+	}
 }

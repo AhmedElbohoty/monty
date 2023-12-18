@@ -60,6 +60,7 @@ void init_app(void);
 void end_app(void);
 void exit_error(void);
 instruction_t *create_instructions(void);
+void handle_instruction(void);
 
 void push(stack_type **stack, unsigned int line_number);
 void pall(stack_type **stack, unsigned int line_number);
