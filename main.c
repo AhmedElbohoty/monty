@@ -34,10 +34,12 @@ int main(int argc, char **argv)
 
 	while (fgets(line, 1024, state.bytecodes))
 	{
-		if (line[0] == '#')
-			continue;
+
 		state.tokens = tokenizer(line);
 		if (!state.tokens[0])
+			continue;
+
+		if (state.tokens[0][0] == '#')
 			continue;
 
 		handle_instruction();
