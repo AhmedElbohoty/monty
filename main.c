@@ -56,7 +56,7 @@ void handle_instruction(void)
 {
 	int i = 0;
 
-	for (i = 0; i < 11; i++)
+	for (i = 0; i < 10; i++)
 	{
 		if (state.instructions[i].opcode == NULL)
 		{
