@@ -62,7 +62,7 @@ void handle_instruction(void)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", state.line_number,
 					state.tokens[0]);
-			break;
+			exit_error();
 		}
 		else if (strcmp(state.instructions[i].opcode, state.tokens[0]) == 0)
 		{
