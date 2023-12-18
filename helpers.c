@@ -70,7 +70,7 @@ void exit_error(void)
  */
 instruction_t *create_instructions(void)
 {
-	instruction_t *ptr = malloc(sizeof(instruction_t) * 11);
+	instruction_t *ptr = malloc(sizeof(instruction_t) * 12);
 
 	if (ptr == NULL)
 	{
@@ -88,7 +88,8 @@ instruction_t *create_instructions(void)
 	ptr[7].opcode = "sub", ptr[7].f = sub;
 	ptr[8].opcode = "mul", ptr[8].f = mul;
 	ptr[9].opcode = "div", ptr[9].f = division;
-	ptr[10].opcode = NULL, ptr[10].f = NULL;
+	ptr[10].opcode = "mod", ptr[10].f = mod;
+	ptr[11].opcode = NULL, ptr[11].f = NULL;
 
 	return (ptr);
 }
