@@ -87,7 +87,8 @@ instruction_t *create_instructions(void)
 	ptr[6].opcode = "add", ptr[6].f = add;
 	ptr[7].opcode = "sub", ptr[7].f = sub;
 	ptr[8].opcode = "mul", ptr[8].f = mul;
-	ptr[9].opcode = NULL, ptr[9].f = NULL;
+	ptr[9].opcode = "div", ptr[9].f = division;
+	ptr[10].opcode = NULL, ptr[10].f = NULL;
 
 	return (ptr);
 }

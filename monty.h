@@ -71,6 +71,7 @@ void swap(stack_type **stack, unsigned int line_number);
 void add(stack_type **stack, unsigned int line_number);
 void sub(stack_type **stack, unsigned int line_number);
 void mul(stack_type **stack, unsigned int line_number);
+void division(stack_type **stack, unsigned int line_number);
 
 extern app_state state;
 

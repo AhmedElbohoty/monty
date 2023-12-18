@@ -79,6 +79,38 @@ void sub(stack_type **stack, unsigned int line_number)
 }
 
 /**
+ * division -  divides the second top element of the stack by
+ *        the top element of the stack.
+ * @stack: The pointer to the stack.
+ * @line_number: The line number.
+ *
+ * Return: Nothing
+ */
+void division(stack_type **stack, unsigned int line_number)
+{
+	stack_type *temp = *stack;
+
+	if (temp == NULL || temp->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		exit_error();
+	}
+
+	while (temp->next != NULL)
+		temp = temp->next;
+
+	if (temp->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		exit_error();
+	}
+
+	temp->prev->n = temp->prev->n / temp->n;
+	temp->prev->next = NULL;
+	free(temp);
+}
+
+/**
  * mul - multiplies the second top element of the
  *       stack with the top element of the stack.
  * @stack: The pointer to the stack.
