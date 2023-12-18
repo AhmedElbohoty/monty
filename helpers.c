@@ -70,7 +70,7 @@ void exit_error(void)
  */
 instruction_t *create_instructions(void)
 {
-	instruction_t *ptr = malloc(sizeof(instruction_t) * 10);
+	instruction_t *ptr = malloc(sizeof(instruction_t) * 11);
 
 	if (ptr == NULL)
 	{
