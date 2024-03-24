@@ -18,7 +18,7 @@ void push(stack_type **stack, unsigned int line_number)
 	if (state.tokens[1] == NULL || !isdigit(*state.tokens[1]))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_error();
 	}
 
 	value = atoi(state.tokens[1]);
@@ -27,23 +27,13 @@ void push(stack_type **stack, unsigned int line_number)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		exit_error();
 	}
 
 	new_node->n = value;
 	new_node->prev = NULL;
 
-	if (*stack == NULL)
-	{
-		new_node->next = NULL;
-		*stack = new_node;
-	}
-	else
-	{
-		new_node->next = *stack;
-		(*stack)->prev = new_node;
-		*stack = new_node;
-	}
+	add_dnodeint_end(stack, value);
 }
 
 /**
@@ -57,8 +47,11 @@ void pall(stack_type **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_type *temp = *stack;
 
-	if (temp == NULL)
-		return;
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		exit_error();
+	}
 
 	while (temp->next != NULL)
 		temp = temp->next;

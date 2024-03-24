@@ -73,6 +73,7 @@ void sub(stack_type **stack, unsigned int line_number);
 void mul(stack_type **stack, unsigned int line_number);
 void division(stack_type **stack, unsigned int line_number);
 void mod(stack_type **stack, unsigned int line_number);
+stack_type *add_dnodeint_end(stack_type **head, const int n);
 
 extern app_state state;
 
