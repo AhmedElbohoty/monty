@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "monty.h"
+#include <ctype.h>
 
 /**
  * push - Adds a new node at the end of a stack_type list.
@@ -9,37 +10,40 @@
  *
  * Return: Nothing
  */
-void push(stack_type **stack, __attribute__((unused)) unsigned int line_number)
+void push(stack_type **stack, unsigned int line_number)
 {
-	stack_type *node, *temp;
+	stack_type *new_node;
+	int value;
 
-	/* Create the new node */
-	node = malloc(sizeof(stack_type));
-	if (node == NULL)
+	if (state.tokens[1] == NULL || !isdigit(*state.tokens[1]))
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit_error();
-
-		return;
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 
-	node->prev = NULL;
-	node->n = atoi(state.tokens[1]); /* TODO: check if string */
-	node->next = NULL;
+	value = atoi(state.tokens[1]);
+	new_node = malloc(sizeof(stack_type));
+
+	if (new_node == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+
+	new_node->n = value;
+	new_node->prev = NULL;
 
 	if (*stack == NULL)
 	{
-		*stack = node;
-		return;
+		new_node->next = NULL;
+		*stack = new_node;
 	}
-
-	/* Add the new node at the end */
-	temp = *stack;
-	while (temp->next != NULL)
-		temp = temp->next;
-
-	temp->next = node;
-	node->prev = temp;
+	else
+	{
+		new_node->next = *stack;
+		(*stack)->prev = new_node;
+		*stack = new_node;
+	}
 }
 
 /**

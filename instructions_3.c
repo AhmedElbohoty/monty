@@ -11,24 +11,24 @@
  */
 void mod(stack_type **stack, unsigned int line_number)
 {
-    stack_type *temp = *stack;
+	stack_type *temp = *stack;
 
-    if (temp == NULL || temp->next == NULL)
-    {
-        fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
-        exit_error();
-    }
+	if (temp == NULL || temp->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+		exit_error();
+	}
 
-    while (temp->next != NULL)
-        temp = temp->next;
+	while (temp->next != NULL)
+		temp = temp->next;
 
-    if (temp->n == 0)
-    {
-        fprintf(stderr, "L%u: division by zero\n", line_number);
-        exit_error();
-    }
+	if (temp->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		exit_error();
+	}
 
-    temp->prev->n = temp->prev->n % temp->n;
-    temp->prev->next = NULL;
-    free(temp);
+	temp->prev->n = temp->prev->n % temp->n;
+	temp->prev->next = NULL;
+	free(temp);
 }
